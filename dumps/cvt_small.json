@@ -1,0 +1,93 @@
+{
+    "layout": {
+        "width": 100,
+        "height": 900,
+        "title_x": 50,
+        "title_y": 13,
+        "titleEnabled": true
+    },
+    "verilogMetadata": {
+        "isVerilogCircuit": false,
+        "isMainCircuit": false,
+        "code": "// Write Some Verilog Code Here!",
+        "subCircuitScopeIds": []
+    },
+    "allNodes": [
+        {
+            "x": 80,
+            "y": 0,
+            "type": 1,
+            "bitWidth": 8,
+            "label": "",
+            "connections": []
+        },
+        {
+            "x": 80,
+            "y": 0,
+            "type": 1,
+            "bitWidth": 8,
+            "label": "",
+            "connections": []
+        }
+    ],
+    "id": 4896214989,
+    "name": "Main",
+    "Input": [
+        {
+            "x": -1980,
+            "y": 460,
+            "objectType": "Input",
+            "label": "0x00",
+            "direction": "RIGHT",
+            "labelDirection": "LEFT",
+            "propagationDelay": 0,
+            "customData": {
+                "nodes": {
+                    "output1": 0
+                },
+                "values": {
+                    "state": 1
+                },
+                "constructorParamaters": [
+                    "RIGHT",
+                    8,
+                    {
+                        "x": 0,
+                        "y": 260,
+                        "id": "rZaraWZGlWPd7n1NBJ7M"
+                    }
+                ]
+            }
+        },
+        {
+            "x": -1980,
+            "y": 480,
+            "objectType": "Input",
+            "label": "",
+            "direction": "RIGHT",
+            "labelDirection": "LEFT",
+            "propagationDelay": 0,
+            "customData": {
+                "nodes": {
+                    "output1": 1
+                },
+                "values": {
+                    "state": 2
+                },
+                "constructorParamaters": [
+                    "RIGHT",
+                    8,
+                    {
+                        "x": 0,
+                        "y": 280,
+                        "id": "NOQZs075on4LjaCIi5bX"
+                    }
+                ]
+            }
+        }
+    ],
+    "restrictedCircuitElementsUsed": [],
+    "nodes": [],
+    "scopes": [],
+    "logixClipBoardData": true
+}

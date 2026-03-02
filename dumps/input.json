@@ -1,0 +1,93 @@
+{
+  "layout": {
+    "width": 100,
+    "height": 2640,
+    "title_x": 50,
+    "title_y": 13,
+    "titleEnabled": true
+  },
+  "verilogMetadata": {
+    "isVerilogCircuit": false,
+    "isMainCircuit": false,
+    "code": "// Write Some Verilog Code Here!",
+    "subCircuitScopeIds": []
+  },
+  "allNodes": [
+    {
+      "x": 320,
+      "y": 0,
+      "type": 1,
+      "bitWidth": 32,
+      "label": "",
+      "connections": [1]
+    },
+    {
+      "x": -110,
+      "y": 60,
+      "type": 2,
+      "bitWidth": 32,
+      "label": "",
+      "connections": [0]
+    },
+    {
+      "x": 320,
+      "y": 0,
+      "type": 1,
+      "bitWidth": 32,
+      "label": "",
+      "connections": [3]
+    },
+    {
+      "x": -110,
+      "y": 80,
+      "type": 2,
+      "bitWidth": 32,
+      "label": "",
+      "connections": [2]
+    }
+  ],
+  "id": 7779518701,
+  "name": "12-32 Select",
+  "Input": [
+    {
+      "x": -1440,
+      "y": 60,
+      "objectType": "Input",
+      "label": "0x0000",
+      "direction": "RIGHT",
+      "labelDirection": "LEFT",
+      "propagationDelay": 0,
+      "customData": {
+        "nodes": { "output1": 0 },
+        "values": { "state": 2130722 },
+        "constructorParamaters": [
+          "RIGHT",
+          32,
+          { "x": 0, "y": 2600, "id": "7j9VB2Frmnz8M19sBm2x" }
+        ]
+      }
+    },
+    {
+      "x": -1440,
+      "y": 80,
+      "objectType": "Input",
+      "label": "0x0004",
+      "direction": "RIGHT",
+      "labelDirection": "LEFT",
+      "propagationDelay": 0,
+      "customData": {
+        "nodes": { "output1": 2 },
+        "values": { "state": 1344309026 },
+        "constructorParamaters": [
+          "RIGHT",
+          32,
+          { "x": 0, "y": 2620, "id": "bn3nCh9MzdNV3IHESjxe" }
+        ]
+      }
+    }
+  ],
+  "restrictedCircuitElementsUsed": [],
+  "nodes": [1, 3],
+  "scopes": [],
+  "logixClipBoardData": true
+}
