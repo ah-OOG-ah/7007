@@ -6,9 +6,10 @@ import write1k from "./write1k";
 const REGISTERS = [ "A", "B", "C", "D", "E", "H", "L", "M" ];
 
 const asm = `
+NOP
 MOV A, 1H
 MOV B, 1H
-ADD B
+ADD 3H
 HLT
 `.trim();
 
@@ -30,6 +31,7 @@ for (const line of asmArr) {
         case "ADD": idx = decodeADD(output, idx, params); break
         case "HLT": idx = decodeHLT(output, idx); break
         case "MOV": idx = decodeMOV(output, idx, params); break
+        case "NOP": idx = decodeNOP(output, idx); break
         default: {
             console.log("Invalid opcode detected at line %i: %s", i, line)
             process.exit(1)
@@ -88,6 +90,12 @@ function decodeMOV(output: number[], idx: number, params: string[]) {
     // Loading R2 -> R1, M is register 0x7
     output[idx++] = 0b1100_0000 | (r1 << 3) | r2
     return idx
+}
+
+// NOP
+function decodeNOP(output: number[], idx: number): number {
+    output[idx] = 1
+    return idx + 1
 }
 
 let writer = write1k(output)
