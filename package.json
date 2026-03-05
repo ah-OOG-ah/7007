@@ -4,6 +4,6 @@
     "@types/node": "^25.3.3"
   },
   "scripts": {
-    "rom": "bun run write1k.ts"
+    "rom": "bun run assembler.ts"
   }
 }

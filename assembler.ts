@@ -8,6 +8,7 @@ const REGISTERS = [ "A", "B", "C", "D", "E", "H", "L", "M" ];
 const asm = `
 MOV A, 1H
 MOV B, 1H
+ADD B
 HLT
 `.trim();
 
@@ -26,6 +27,7 @@ for (const line of asmArr) {
     const params = line.split(" ")
 
     switch (params[0]) {
+        case "ADD": idx = decodeADD(output, idx, params); break
         case "HLT": idx = decodeHLT(output, idx); break
         case "MOV": idx = decodeMOV(output, idx, params); break
         default: {
@@ -35,6 +37,27 @@ for (const line of asmArr) {
     }
 
     ++i;
+}
+
+function decodeInt(string: string): number {
+    return parseInt(string.slice(0, -1), 16)
+}
+
+// ADD r      --- ex: ADD B
+// ADD M      --- ex: ADD M
+// ADD number --- ex: ADD 42H
+function decodeADD(output: number[], idx: number, params: string[]) {
+    const r1 = REGISTERS.indexOf(params[1][0]);
+    if (r1 < 0) {
+        // Add immediate
+        output[idx++] = 0b00000100
+        output[idx++] = decodeInt(params[1])
+        return idx
+    }
+
+    // Add R to the accumulator
+    output[idx++] = 0b10000000 | r1
+    return idx
 }
 
 // HLT
@@ -58,7 +81,7 @@ function decodeMOV(output: number[], idx: number, params: string[]) {
     if (r2 < 0) {
         // Loading some int -> R
         output[idx++] = 0b0000_0110 | (r1 << 3)
-        output[idx++] = parseInt(params[2].slice(0, -1), 16)
+        output[idx++] = decodeInt(params[2])
         return idx
     }
 
