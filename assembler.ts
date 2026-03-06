@@ -10,6 +10,12 @@ NOP
 MOV A, 1H
 MOV B, 1H
 ADD 3H
+MOV D, A
+ADD A
+ADD D
+ADD A
+ADD B
+ADD A
 HLT
 `.trim();
 
