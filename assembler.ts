@@ -16,6 +16,9 @@ ADD D
 ADD A
 ADD B
 ADD A
+MOV C, cfH
+ADD C
+ADD 1H
 HLT
 `.trim();
 
