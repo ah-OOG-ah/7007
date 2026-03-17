@@ -19,8 +19,6 @@ ADD A
 HLT
 `.trim();
 
-console.log("Assembly:")
-console.log(asm);
 
 const asmArr = asm.split("\n");
 
@@ -30,8 +28,10 @@ let output = new Array<number>(asmArr.length)
 let i = 1;
 let idx = 0;
 
+console.log("Assembly:")
 for (const line of asmArr) {
     const params = line.split(" ")
+    const prevI = idx
 
     switch (params[0]) {
         case "ADD": idx = decodeADD(output, idx, params); break
@@ -44,6 +44,10 @@ for (const line of asmArr) {
         }
     }
 
+    const logLine = "0x" + prevI.toString(15+1).padStart(2, "0") + ": "
+        + line.padEnd(10, " ") + ":"
+        + output.slice(prevI, idx).map(value => " 0x" + value.toString(15+1).padStart(2, "0")).join("")
+    console.log(logLine)
     ++i;
 }
 
