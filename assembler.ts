@@ -17,6 +17,8 @@ let i = 1;
 let idx = 0;
 
 console.log("Assembly:")
+// the 7007 requires programs to start with a NOP
+idx = decodeNOP(output, idx)
 for (const line of asmArr) {
     const params = line.split(" ")
     const prevI = idx
@@ -40,11 +42,8 @@ for (const line of asmArr) {
     console.log(logLine)
     ++i;
 }
-
-// All other instructions become HLT
-while (idx < output.length) {
-    idx = decodeHLT(output, idx)
-}
+// Add a HLT at the end
+idx = decodeHLT(output, idx)
 
 /*    BEGIN DECODE OPS     */
 

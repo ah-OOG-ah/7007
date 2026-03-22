@@ -1,4 +1,3 @@
-NOP
 MOV A, 1H
 MOV B, 1H
 ADD 3H
@@ -21,4 +20,3 @@ SHL
 SHR
 SHR
 SHR
-HLT
