@@ -1,9 +1,7 @@
 // Given a hard-coded assembly program, converts it to bits.
-
-import {write} from "node:fs";
 import write1k from "./write1k";
 
-const REGISTERS = [ "A", "B", "C", "D", "E", "H", "L", "M" ];
+const REGISTERS = [ "B", "C", "D", "E", "H", "L", "M", "A" ];
 
 const asm = `
 NOP
@@ -54,6 +52,13 @@ for (const line of asmArr) {
     ++i;
 }
 
+// All other instructions become HLT
+while (idx < output.length) {
+    idx = decodeHLT(output, idx)
+}
+
+/*    BEGIN DECODE OPS     */
+
 function decodeInt(string: string): number {
     return parseInt(string.slice(0, -1), 16)
 }
@@ -77,7 +82,7 @@ function decodeADD(output: number[], idx: number, params: string[]) {
 
 // HLT
 function decodeHLT(output: number[], idx: number): number {
-    output[idx] = 0
+    output[idx] = 0b01110110
     return idx + 1
 }
 
@@ -101,13 +106,13 @@ function decodeMOV(output: number[], idx: number, params: string[]) {
     }
 
     // Loading R2 -> R1, M is register 0x7
-    output[idx++] = 0b1100_0000 | (r1 << 3) | r2
+    output[idx++] = 0b01_000_000 | (r1 << 3) | r2
     return idx
 }
 
 // NOP
 function decodeNOP(output: number[], idx: number): number {
-    output[idx] = 1
+    output[idx] = 0
     return idx + 1
 }
 
