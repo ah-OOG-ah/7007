@@ -6,3 +6,5 @@ https://datasheets.chipdb.org/upload/wepwawet/8008_(1978)%20Datasheet.pdf (Intel
 https://datasheets.chipdb.org/Intel/MCS-80/intel-8080.pdf (8080 datasheet)
 https://en.wikipedia.org/wiki/Intel_8080 (Wikipedia on the 8080)
 https://stackoverflow.com/questions/10932578/how-are-shifts-implemented-on-the-hardware-level (Barrel shifter on SO)
+
+I spent about an hour on the shifter, another 15min on debugging, and then another 30min writing and testing assembly.
