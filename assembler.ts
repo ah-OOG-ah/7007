@@ -1,27 +1,14 @@
 // Given a hard-coded assembly program, converts it to bits.
 import write1k from "./write1k";
+import * as fs from "node:fs";
 
 const REGISTERS = [ "B", "C", "D", "E", "H", "L", "M", "A" ];
 
 const asm = `
-NOP
-MOV A, 1H
-MOV B, 1H
-ADD 3H
-MOV D, A
-ADD A
-ADD D
-ADD A
-ADD B
-ADD A
-MOV C, cfH
-ADD C
-ADD 1H
-HLT
 `.trim();
 
-
-const asmArr = asm.split("\n");
+const asmFile = process.argv.length >= 3 ? process.argv[2] : "asm.txt"
+const asmArr = fs.readFileSync(asmFile).toString().trim().split("\n");
 
 // While the output can be and likely is longer than this, there are at least this many output bytes
 let output = new Array<number>(asmArr.length)
@@ -38,6 +25,8 @@ for (const line of asmArr) {
         case "ADD": idx = decodeADD(output, idx, params); break
         case "HLT": idx = decodeHLT(output, idx); break
         case "MOV": idx = decodeMOV(output, idx, params); break
+        case "SHR": idx = decodeSHR(output, idx); break
+        case "SHL": idx = decodeSHL(output, idx); break
         case "NOP": idx = decodeNOP(output, idx); break
         default: {
             console.log("Invalid opcode detected at line %i: %s", i, line)
@@ -113,6 +102,16 @@ function decodeMOV(output: number[], idx: number, params: string[]) {
 // NOP
 function decodeNOP(output: number[], idx: number): number {
     output[idx] = 0
+    return idx + 1
+}
+
+function decodeSHR(output: number[], idx: number): number {
+    output[idx] = 0b0000_1111
+    return idx + 1
+}
+
+function decodeSHL(output: number[], idx: number): number {
+    output[idx] = 0b0000_0111
     return idx + 1
 }
 
