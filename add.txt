@@ -1,0 +1,7 @@
+MOV L, 0F
+MOV A, M
+MOV L, 1F
+ADD M
+MOV L, 02F
+MOV L, M
+MOV M, A
