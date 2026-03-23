@@ -25,6 +25,7 @@ for (const line of asmArr) {
 
     switch (params[0]) {
         case "ADD": idx = decodeADD(output, idx, params); break
+        case "AND": idx = decodeAND(output, idx, params); break
         case "HLT": idx = decodeHLT(output, idx); break
         case "MOV": idx = decodeMOV(output, idx, params); break
         case "SHR": idx = decodeSHR(output, idx); break
@@ -65,6 +66,16 @@ function decodeADD(output: number[], idx: number, params: string[]) {
 
     // Add R to the accumulator
     output[idx++] = 0b10000000 | r1
+    return idx
+}
+
+// AND r --- ex: AND B
+function decodeAND(output: number[], idx: number, params: string[]) {
+    const r1 = REGISTERS.indexOf(params[1][0]);
+    if (r1 < 0) throw new Error("Invalid register " + params[1] + " specified for AND!")
+
+    // AND R with the accumulator
+    output[idx++] = 0b10100_000 | r1
     return idx
 }
 
