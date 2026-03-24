@@ -1,5 +1,6 @@
 # 7007 Microprocessor Project
-mul.txt describes multiplication by 4, add.txt adds two numbers, and div.txt divides by four.
+Minor edits were made, but not finalized in time for the extended due date. As such, you're probably looking for tag 
+`0.0.1`, not the current HEAD.
 
 Sources used:
 https://datasheets.chipdb.org/upload/wepwawet/8008_(1978)%20Datasheet.pdf (Intel 8008 Datasheet)
