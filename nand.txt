@@ -1,0 +1,8 @@
+# Calling convention: first three arguments are passed in D, E, and C
+MOV L, D
+MOV A, M
+MOV L, E
+AND M
+NOT
+MOV L, C
+MOV M, A

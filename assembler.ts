@@ -4,9 +4,6 @@ import * as fs from "node:fs";
 
 const REGISTERS = [ "B", "C", "D", "E", "H", "L", "M", "A" ];
 
-const asm = `
-`.trim();
-
 const asmFile = process.argv.length >= 3 ? process.argv[2] : "asm.txt"
 const asmArr = fs.readFileSync(asmFile).toString().trim().split("\n");
 
@@ -20,6 +17,9 @@ console.log("Assembly:")
 // the 7007 requires programs to start with a NOP
 idx = decodeNOP(output, idx)
 for (const line of asmArr) {
+    if (line.trim() === "") continue
+    if (line[0] === "#") continue
+
     const params = line.split(" ")
     const prevI = idx
 
@@ -28,9 +28,11 @@ for (const line of asmArr) {
         case "AND": idx = decodeAND(output, idx, params); break
         case "HLT": idx = decodeHLT(output, idx); break
         case "MOV": idx = decodeMOV(output, idx, params); break
+        case "NOP": idx = decodeNOP(output, idx); break
+        case "NOT": idx = decodeNOT(output, idx); break
+        case "OR":  idx = decodeOR(output, idx, params); break
         case "SHR": idx = decodeSHR(output, idx); break
         case "SHL": idx = decodeSHL(output, idx); break
-        case "NOP": idx = decodeNOP(output, idx); break
         default: {
             console.log("Invalid opcode detected at line %i: %s", i, line)
             process.exit(1)
@@ -113,6 +115,22 @@ function decodeMOV(output: number[], idx: number, params: string[]) {
 function decodeNOP(output: number[], idx: number): number {
     output[idx] = 0
     return idx + 1
+}
+
+// NOT --- always targets A
+function decodeNOT(output: number[], idx: number) {
+    output[idx] = 0b0010_1111
+    return idx + 1
+}
+
+// OR r --- ex: OR B
+function decodeOR(output: number[], idx: number, params: string[]) {
+    const r1 = REGISTERS.indexOf(params[1][0]);
+    if (r1 < 0) throw new Error("Invalid register " + params[1] + " specified for OR!")
+
+    // OR R with the accumulator
+    output[idx++] = 0b10110_000 | r1
+    return idx
 }
 
 function decodeSHR(output: number[], idx: number): number {

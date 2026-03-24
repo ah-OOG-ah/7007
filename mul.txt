@@ -1,8 +1,0 @@
-MOV L, 0F
-MOV A, M
-MOV L, 1F
-MOV B, M
-SHL
-SHL
-MOV L, B
-MOV M, A
